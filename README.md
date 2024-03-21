@@ -48,10 +48,10 @@ Analyzing the func function :
 
 
 -`mov DWORD PTR -20[rbp], edi` indicates that out func is taking int as an argument since DWORD stands for Double Word. It represents a data size of 32 bits or 4 bytes.
--`sal rax, 3` performs a left shift by 3 bits
--`xor QWORD PTR -8[rbp], 5` performs xor with 5
--`movabs rax, 5934314573` moves out const to the rax register
--`cmp QWORD PTR -8[rbp], rax` compares the last xor operation with the const 5934314573, and returns 1 if they are equal, 0 otherwise .
+- `sal rax, 3` performs a left shift by 3 bits
+- `xor QWORD PTR -8[rbp], 5` performs xor with 5
+- `movabs rax, 5934314573` moves out const to the rax register
+- `cmp QWORD PTR -8[rbp], rax` compares the last xor operation with the const 5934314573, and returns 1 if they are equal, 0 otherwise .
 
 Analyzing the main function :
 
