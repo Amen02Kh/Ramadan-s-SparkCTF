@@ -1,6 +1,6 @@
 # Ramadhan's SparkCTF
 ## Reverse Engineering Writeup
-### Passi
+### **Passi**
 
 For this task we were given a **Binary**,based on the description it was asking to retrieve a password ! 
 
@@ -36,4 +36,37 @@ The first highlighted line is out user input string length being compared to 25 
 ![Passi's type](/Images/Passi7.png)
 
 Just a normal behaviour the binary asks for input where I entered a random 25 characters string, after that we arrived at our desired breakpoint , if you look closely at the assembly code from the beginning you can see that the password where stored at '-0x28(%rbp)' which just before the comparison got moved to %rdx, by running x/s $rdx we can print out the password and thats our flag : `Spark{AAKZZBCRAKADSZKABRTZDRKTB}`
+
+### **ASSemblY**
+
+![Assembly](/Images/Ass0.png)
+
+As the task name says , we were provided with an assembly code and an output , our mission is to retrieve the lost ID.
+Analyzing the func function :
+
+![Passi's type](/Images/Ass1.png)
+
+
+-`mov DWORD PTR -20[rbp], edi` indicates that out func is taking int as an argument since DWORD stands for Double Word. It represents a data size of 32 bits or 4 bytes.
+-`sal rax, 3` performs a left shift by 3 bits
+-`xor QWORD PTR -8[rbp], 5` performs xor with 5
+-`movabs rax, 5934314573` moves out const to the rax register
+-`cmp QWORD PTR -8[rbp], rax` compares the last xor operation with the const 5934314573, and returns 1 if they are equal, 0 otherwise .
+
+Analyzing the main function :
+
+- It just call the func function with an argument
+
+Now we know everything about our program its time to reverse it.
+
+Note : the output file provided returned 1 so the comparision with the const must return true.
+
+![Passi's type](/Images/Ass3.png)
+
+
+And thats the flag : `Spark{741789321}`
+
+![Passi's type](/Images/Ass4.png)
+
+
 
